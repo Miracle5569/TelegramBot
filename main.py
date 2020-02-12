@@ -17,6 +17,7 @@ def handlee_text(message):
     bot.send_photo(message.chat.id, photo=picture.hello,
                    caption=text.Send_message, reply_markup=key)
 
+
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == "\U0000270F Скетчи":
@@ -26,18 +27,19 @@ def handle_text(message):
         btn_3 = types.InlineKeyboardButton(text="3", callback_data="3")
         btn_4 = types.InlineKeyboardButton(text="\U000023E9", callback_data="->")
         key.add(btn_1, btn_2, btn_3, btn_4)
-        bot.send_message(message.chat.id, text="Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных \U0001F60B",
+        bot.send_message(message.chat.id,
+                         text="Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных \U0001F60B",
                          reply_markup=key)
 
-#Рандом арты-----------------------------------------------------------
+    # Рандом арты-----------------------------------------------------------
     if message.text == "\U0001F646 Рандом арты":
-            directory = 'C:/Users/ДНС/Desktop/Документы/Курсовая работа(Telegram bot)/Random picture'
-            all_files_in_directory = os.listdir(directory)
-            random_file = random.choice(all_files_in_directory)
-            img = open(directory + '/' + random_file, 'rb')
-            bot.send_photo(message.chat.id, img)
-                      
-# --------------------------------------------------------------------------------------------------------------------------------------------
+        directory = 'Random picture'
+        all_files_in_directory = os.listdir(directory)
+        random_file = random.choice(all_files_in_directory)
+        img = open(directory + '/' + random_file, 'rb')
+        bot.send_photo(message.chat.id, img)
+
+    # --------------------------------------------------------------------------------------------------------------------------------------------
     # АРТЫ ХУДОЖНИКОВ
     if message.text == "\U00002712 Арты художников":
         key = types.ReplyKeyboardMarkup(True, False)
@@ -45,16 +47,16 @@ def handle_text(message):
         key.row("\U0001F478 Кристина Виверс", "\U0001F468 Александр Викторович")
         key.row("Вернуться назад\U000021A9")
         bot.send_message(
-            message.chat.id, text="Выбери интересующего тебе художника\U0000270C",  reply_markup=key)
+            message.chat.id, text="Выбери интересующего тебе художника\U0000270C", reply_markup=key)
 
-# НАЗАД В ГЛАВНОЕ МЕНЮ-------------------------------------------------------------------------------------
+    # НАЗАД В ГЛАВНОЕ МЕНЮ-------------------------------------------------------------------------------------
     if message.text == "Вернуться назад\U000021A9":
         key = types.ReplyKeyboardMarkup(True, False)
         key.row("\U0001F646 Рандом арты", "\U0000270F Скетчи")
         key.row("\U00002712 Арты художников")
         bot.send_message(
-            message.chat.id, text="Возращаемся назад к главному меню\U000023F3",  reply_markup=key)
-# НАЗАД В ГЛАВНОЕ МЕНЮ-------------------------------------------------------------------------------------
+            message.chat.id, text="Возращаемся назад к главному меню\U000023F3", reply_markup=key)
+    # НАЗАД В ГЛАВНОЕ МЕНЮ-------------------------------------------------------------------------------------
 
     if message.text == "\U0001F467 Olga Lakomaya":
         key = types.InlineKeyboardMarkup()
@@ -101,7 +103,6 @@ def handle_text(message):
                          reply_markup=key)
 
 
-        
 # --------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -117,7 +118,8 @@ def callback_inline(message):
         btn_4 = types.InlineKeyboardButton(text="\U000023E9", callback_data="->")
         key.add(btn_1, btn_2, btn_3, btn_4)
         bot.edit_message_text(chat_id=message.message.chat.id, message_id=message.message.message_id,
-                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных", reply_markup=key)
+                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных",
+                              reply_markup=key)
     # обработка кнопки вперед
     elif message.data == "->":
         key = types.InlineKeyboardMarkup()
@@ -129,7 +131,8 @@ def callback_inline(message):
             text="\U000023EA", callback_data="mainmenu")
         key.add(btn_5, btn_6, btn_7, btn_8, btn_back)
         bot.edit_message_text(chat_id=message.message.chat.id, message_id=message.message.message_id,
-                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных", reply_markup=key)
+                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных",
+                              reply_markup=key)
     # Обработка кнопки вперед (последняя страница)
     elif message.data == "-->":
         key = types.InlineKeyboardMarkup()
@@ -142,7 +145,8 @@ def callback_inline(message):
         key.add(btn_5, btn_6, btn_7, btn_8)
         key.add(btn_back)
         bot.edit_message_text(chat_id=message.message.chat.id, message_id=message.message.message_id,
-                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных", reply_markup=key)
+                              text="\U0001F64C Здорого, я подготовил для тебя несколько скетчей, выбирай любую из представденных",
+                              reply_markup=key)
 
     # Оработка отправки сообщений на нажатие кнопок
     if message.data == "1":
@@ -283,7 +287,7 @@ def callback_inline(message):
     if message.data == 'Delete10':
         bot.delete_message(chat_id=message.message.chat.id,
                            message_id=message.message.message_id)
-# ---------------------------------------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------------------------------------
     # АРТЫ ХУДОЖНИКОВ
     # Olga Lakomaya----------------------------------------
     if message.data == 'Olga1':
@@ -383,7 +387,7 @@ def callback_inline(message):
     if message.data == "AlexandraDelete4":
         bot.delete_message(chat_id=message.message.chat.id,
                            message_id=message.message.message_id)
-    
+
     # Кристина Виверс -------------------------------------------
     if message.data == 'Cristina1':
         key = types.InlineKeyboardMarkup()
@@ -408,7 +412,6 @@ def callback_inline(message):
     if message.data == "CristinaDelete2":
         bot.delete_message(chat_id=message.message.chat.id,
                            message_id=message.message.message_id)
-
 
     if message.data == 'Cristina3':
         key = types.InlineKeyboardMarkup()
@@ -471,7 +474,6 @@ def callback_inline(message):
         bot.delete_message(chat_id=message.message.chat.id,
                            message_id=message.message.message_id)
 
-
     if message.data == 'Alex4':
         key = types.InlineKeyboardMarkup()
         btn_delete = types.InlineKeyboardButton(
@@ -483,20 +485,6 @@ def callback_inline(message):
     if message.data == "AlexDelete4":
         bot.delete_message(chat_id=message.message.chat.id,
                            message_id=message.message.message_id)
-
-
-
-
-
-
-
-
-# -----------------------------------------------------------------------------------------------------------------------------
-    # Обработка следующей кнопки
-
-        # ВЫдача рандомных скетчей
-        
-        # ----------------------------------------------------
 
 
 bot.polling(none_stop=True, interval=0)
